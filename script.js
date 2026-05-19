@@ -8,7 +8,7 @@ let myFile;
 button.onclick = () => input.click();
 
 input.addEventListener('change', function () {
-  myFile = this.files[0];
+  myFile = this.files[0]; // new topic to me
   dragArea.classList.add('active');
   showMe();
 });
@@ -26,7 +26,7 @@ dragArea.addEventListener('dragleave', function () {
 
 dragArea.addEventListener('drop', event => {
   event.preventDefault();
-  myFile = event.dataTransfer.files[0];
+  myFile = event.dataTransfer.files[0]; // new topic to me
   showMe();
 });
 
@@ -37,12 +37,14 @@ function showMe() {
   if (validEx.includes(fileType)) {
     let fileReader = new FileReader();
 
+    // new topic to me
     fileReader.onload = () => {
       let imageURL = fileReader.result;
       let image = `<img src="${imageURL}" alt="">`;
       dragArea.innerHTML = image;
     };
 
+    // new topic to me
     fileReader.readAsDataURL(myFile);
   } else {
     alert('This file is not valid');

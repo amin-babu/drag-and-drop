@@ -10,6 +10,7 @@ button.onclick = () => input.click();
 input.addEventListener('change', function () {
   myFile = this.files[0];
   dragArea.classList.add('active');
+  showMe();
 });
 
 dragArea.addEventListener('dragover', function (event) {
@@ -22,3 +23,31 @@ dragArea.addEventListener('dragleave', function () {
   dragArea.classList.remove('active');
   dragText.textContent = 'Drag & Drop';
 });
+
+dragArea.addEventListener('drop', event => {
+  event.preventDefault();
+  myFile = event.dataTransfer.files[0];
+  showMe();
+});
+
+function showMe() {
+  let fileType = myFile.type;
+  let validEx = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+
+  if (validEx.includes(fileType)) {
+    let fileReader = new FileReader();
+
+    fileReader.onload = () => {
+      let imageURL = fileReader.result;
+      let image = `<img src="${imageURL}" alt="">`;
+      dragArea.innerHTML = image;
+    };
+
+    fileReader.readAsDataURL(myFile);
+  } else {
+    alert('This file is not valid');
+    dragArea.classList.remove('active');
+    dragText.textContent = 'Drag & Drop';
+  }
+}
+

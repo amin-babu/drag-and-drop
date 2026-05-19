@@ -60,3 +60,15 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.appBody img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .appBody {
+    width: 90%;
+  }
+}
